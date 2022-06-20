@@ -2,15 +2,10 @@
 
 // BANKIST APP
 
-/////////////////////////////////////////////////
-// Data
-
-// DIFFERENT DATA! Contains movement dates, currency and locale
-
 const account1 = {
   owner: 'Jonas Schmedtmann',
   movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
-  interestRate: 1.2, // %
+  interestRate: 1.2,
   pin: 1111,
 
   movementsDates: [
@@ -24,7 +19,7 @@ const account1 = {
     '2020-07-12T10:51:36.790Z',
   ],
   currency: 'EUR',
-  locale: 'pt-PT', // de-DE
+  locale: 'pt-PT',
 };
 
 const account2 = {
@@ -49,7 +44,6 @@ const account2 = {
 
 const accounts = [account1, account2];
 
-/////////////////////////////////////////////////
 // Elements
 const labelWelcome = document.querySelector('.welcome');
 const labelDate = document.querySelector('.date');
@@ -76,7 +70,6 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-/////////////////////////////////////////////////
 // Functions
 
 const formateMovmentsDate = function (date, locale) {
@@ -114,7 +107,7 @@ const startLogoutTimer = function () {
     time--;
   };
 
-  let time = 110;
+  let time = 10;
   tick();
   const timer = setInterval(tick, 1000);
   return timer;
@@ -168,7 +161,6 @@ const calcDisplaySummary = function (acc) {
     .filter(mov => mov > 0)
     .map(deposit => (deposit * acc.interestRate) / 100)
     .filter((int, i, arr) => {
-      // console.log(arr);
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
@@ -197,7 +189,6 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
-///////////////////////////////////////
 // Event handlers
 
 let currentAccount, timer;
@@ -333,9 +324,3 @@ btnSort.addEventListener('click', function (e) {
   displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
-
-containerApp.style.opacity = 100;
-
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
