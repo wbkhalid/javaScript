@@ -260,15 +260,19 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
-    currentAccount.movementsDates.push(new Date().toISOString());
-
-    // Update UI
-    updateUI(currentAccount);
+    setTimeout(function(){
+      // Add movement
+      currentAccount.movements.push(amount);
+      currentAccount.movementsDates.push(new Date().toISOString());
+  
+      // Update UI
+      updateUI(currentAccount);
+     } ,3000)
+    };
+    
+    inputLoanAmount.value= '';
   }
-  inputLoanAmount.value = '';
-});
+);
 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
