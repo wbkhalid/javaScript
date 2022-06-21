@@ -36,22 +36,35 @@ document.addEventListener('keydown', function (e) {
 //Scroll btn
 
 btnScrollTo.addEventListener('click', function (e) {
-  // const s1coords = section1.getBoundingClientRect();
-  // console.log(e.target.getBoundingClientRect())
-
-  //old way 1
-  // window.scrollTo(
-  //   s1coords.left + window.pageXOffset,
-  //   s1coords.top + window.pageYOffset
-  // );
-
-  //old way 2
-  // window.scrollTo({
-  //   left: s1coords.left + window.pageXOffset,
-  //   top: s1coords.top + window.pageYOffset,
-  //   behavior:'smooth'
-  // });
-
   //new method
-  section1.scrollIntoView({behavior:'smooth'})
+  section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+//page navigation(event delegation)
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+// #########################################
+
+// btnScrollTo.addEventListener('click', function (e) {
+// const s1coords = section1.getBoundingClientRect();
+// console.log(e.target.getBoundingClientRect())
+
+//old way 1
+// window.scrollTo(
+//   s1coords.left + window.pageXOffset,
+//   s1coords.top + window.pageYOffset
+// );
+
+//old way 2
+// window.scrollTo({
+//   left: s1coords.left + window.pageXOffset,
+//   top: s1coords.top + window.pageYOffset,
+//   behavior:'smooth'
+// });
+// });
