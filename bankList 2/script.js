@@ -90,6 +90,64 @@ nav.addEventListener('mouseover', handleOver.bind(.5));
 nav.addEventListener('mouseout', handleOver.bind(1)
 );
 
+
+///stick navBar
+
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickynav = function(enteries){
+  const [entry]= enteries;
+  if (!entry.isIntersecting) nav.classList.add('sticky')
+  else nav.classList.remove('sticky')
+}
+const headerObserver= new IntersectionObserver(stickynav,{
+  root:null,
+  threshold:0,
+  rootMargin:`-${navHeight}px`
+});
+headerObserver.observe(header);
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const obsCallback= (enteries,observer)=>{
+//   enteries.forEach((entry)=>{
+// console.log(entry)
+//   })
+
+// }
+
+// const obsOptions= {
+//   root:null,
+//   threshold:0.5,
+
+// }
+
+// const observer= new IntersectionObserver(obsCallback,obsOptions);
+// observer.observe(section1);
+
+
+// const initialcoords = section1.getBoundingClientRect();
+// window.addEventListener('scroll', function(){
+//   if(this.window.scrollY>initialcoords.top){
+//     nav.classList.add('sticky')}
+//   else
+//     {
+//       nav.classList.remove('sticky')  
+//   }
+// })
+
+
 // #########################################
 
 // btnScrollTo.addEventListener('click', function (e) {
