@@ -1,8 +1,5 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
@@ -16,6 +13,9 @@ const tabsContainer = document.querySelector('.operations__tab-container');
 const tabsContent = document.querySelectorAll('.operations__content');
 
 const nav = document.querySelector('.nav');
+
+const header = document.querySelector('.header');
+const imgTargets = document.querySelectorAll('img[data-src]');
 
 //functions
 
@@ -91,7 +91,6 @@ nav.addEventListener('mouseout', handleOver.bind(1));
 
 ///stick navBar
 
-const header = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
 
 const stickynav = function (enteries) {
@@ -127,7 +126,6 @@ allSections.forEach(function (section) {
 });
 
 //lazy loading images
-const imgTargets = document.querySelectorAll('img[data-src]');
 
 const loading = function (entries, observer) {
   const [entry] = entries;
@@ -188,12 +186,6 @@ const slider = function () {
   };
   gotoSlide(0);
 
-  const init = function () {
-    gotoSlide(currSlide);
-    createDots();
-    activeDots(currSlide);
-  };
-
   const prevSlide = function () {
     if (currSlide === 0) {
       currSlide = maxSlides - 1;
@@ -231,6 +223,8 @@ const slider = function () {
 };
 
 slider();
+
+// #########################################
 // const obsCallback= (enteries,observer)=>{
 //   enteries.forEach((entry)=>{
 // console.log(entry)
@@ -256,8 +250,6 @@ slider();
 //       nav.classList.remove('sticky')
 //   }
 // })
-
-
 
 // btnScrollTo.addEventListener('click', function (e) {
 // const s1coords = section1.getBoundingClientRect();
