@@ -11,15 +11,16 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
+let map,mapEvent; 
 if (navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
     function (position) {
       const { latitude } = position.coords;
       const { longitude } = position.coords;
-      console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
+      // console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
 
       const coords = [latitude, longitude];
-      const map = L.map('map').setView(coords, 15);
+      map = L.map('map').setView(coords, 15);
 
       L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
         attribution:
@@ -28,26 +29,45 @@ if (navigator.geolocation)
 
 
       
-      map.on('click', function (mapEvent) {
+      map.on('click', function (mapE) {
         // console.log(a)
-        const {lat,lng}= mapEvent.latlng
-        L.marker([lat,lng])
-          .addTo(map)
-          .bindPopup(
-            L.popup({
-
-              maxWidth: 200,
-              minWidth:50,
-              autoClose:false,
-              closeOnClick:false,
-              className:'running-popup',
-            })
-          )
-          .setPopupContent('worked')
-          .openPopup();
+        mapEvent=mapE;
+        form.classList.remove('hidden')
+        inputDistance.focus()
+       
       });
     },
     function () {
       alert('block');
     }
   );
+
+
+  form.addEventListener('submit', function(e){
+    inputDistance.value=inputCadence.value=inputDuration.value=inputElevation.value= ''
+    e.preventDefault()
+
+    const {lat,lng}= mapEvent.latlng
+    L.marker([lat,lng])
+      .addTo(map)
+      .bindPopup(
+        L.popup({
+
+          maxWidth: 200,
+          minWidth:50,
+          autoClose:false,
+          closeOnClick:false,
+          className:'running-popup',
+        })
+      )
+      .setPopupContent('worked')
+      .openPopup();
+
+
+  })
+
+  inputType.addEventListener('change',function(){
+    inputElevation.closest('.form__row').classList.toggle('form__row--hidden')
+    inputCadence.closest('.form__row').classList.toggle('form__row--hidden')
+  })
+
